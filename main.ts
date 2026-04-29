@@ -1,8 +1,7 @@
 namespace SpriteKind {
     export const Object = SpriteKind.create()
 }
-// Game over when you reach the end of the
-// neighborhood
+// Game over when you reach the end of the neighborhood
 scene.onOverlapTile(SpriteKind.Player, myTiles.tile3, function (sprite, location) {
     game.setGameOverEffect(true, effects.confetti)
     game.gameOver(true)
@@ -108,8 +107,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . . . . . . .
         `)
 })
-// Change the car image based on the direction it's
-// driving
+// Change the car image based on the direction it's driving
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     car.setImage(img`
         . . . . . . a a c c a a . . . .
@@ -135,6 +133,11 @@ sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Object, function (sprite, ot
     music.magicWand.play()
     sprite.destroy(effects.confetti, 500)
     info.changeScoreBy(1)
+    // Check if player has reached a score of 10
+    if (info.score() == 10) {
+        game.setGameOverEffect(true, effects.confetti)
+        game.gameOver(true)
+    }
 })
 // Lose a point for driving into a house
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Object, function (sprite, otherSprite) {
